@@ -1,0 +1,49 @@
+<?php
+function horaEspejo($horaStr) {
+    list($h, $m) = explode(":", $horaStr);
+    
+    $h = intval($h);
+    $m = intval($m);
+    
+    // Convertir a minutos
+    $totalMin = ($h % 12) * 60 + $m;
+    
+    // Minutos espejo
+    $espejoMin = (12 * 60 - $totalMin) % (12 * 60);
+    
+    // Convertir nuevamente
+    $hEspejo = intdiv($espejoMin, 60);
+    $mEspejo = $espejoMin % 60;
+    
+    if ($hEspejo == 0) {
+        $hEspejo = 12;
+    }
+    
+    return sprintf("%02d:%02d", $hEspejo, $mEspejo);
+}
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hora Espejo</title>
+</head>
+<body>
+
+<h2>Hora reflejada en el espejo</h2>
+
+<form method="post">
+    Ingrese la hora (HH:MM):
+    <input type="time" name="hora" required>
+    <button type="submit">Calcular</button>
+</form>
+
+<?php
+if (isset($resultado)) {
+    echo "<h3>Hora en el espejo: $resultado</h3>";
+}
+?>
+
+</body>
+</html>
