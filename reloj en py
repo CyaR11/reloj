@@ -1,0 +1,23 @@
+def hora_espejo(hora_str):
+
+    h, m = map(int, hora_str.split(":"))
+    
+
+    total_min = h % 12 * 60 + m
+    
+
+    espejo_min = (12 * 60 - total_min) % (12 * 60)
+    
+
+    h_espejo = espejo_min // 60
+    m_espejo = espejo_min % 60
+
+    if h_espejo == 0:
+        h_espejo = 12
+    
+    return f"{h_espejo:02d}:{m_espejo:02d}"
+
+
+hora = input("Ingrese la hora (HH:MM): ")
+resultado = hora_espejo(hora)
+print("Hora en el espejo:", resultado)
