@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hora Espejo</title>
+</head>
+<body>
+
+<h2>Hora reflejada en el espejo</h2>
+
+Ingrese la hora:
+<input type="time" id="hora">
+<button onclick="calcular()">Calcular</button>
+
+<h3 id="resultado"></h3>
+
+<script>
+function horaEspejo(horaStr) {
+    let partes = horaStr.split(":");
+    let h = parseInt(partes[0]);
+    let m = parseInt(partes[1]);
+    
+    let totalMin = (h % 12) * 60 + m;
+    let espejoMin = (12 * 60 - totalMin) % (12 * 60);
+    
+    let hEspejo = Math.floor(espejoMin / 60);
+    let mEspejo = espejoMin % 60;
+    
+    if (hEspejo === 0) {
+        hEspejo = 12;
+    }
+    
+    return String(hEspejo).padStart(2, '0') + ":" +
+           String(mEspejo).padStart(2, '0');
+}
+
+function calcular() {
+    let hora = document.getElementById("hora").value;
+    let resultado = horaEspejo(hora);
+    
+    document.getElementById("resultado").innerText =
+        "Hora en el espejo: " + resultado;
+}
+</script>
+
+</body>
+</html>
